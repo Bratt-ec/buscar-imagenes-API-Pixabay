@@ -51,7 +51,7 @@ function mostrarAlerta(mensaje){
 
 }
 
-function buscarImagenes(){
+async function buscarImagenes(){
 
     const termino = document.querySelector('#termino').value;
 
@@ -60,14 +60,24 @@ function buscarImagenes(){
 
     // console.log(url);
 
-    fetch(url)
-        .then(respuesta => respuesta.json())
-        .then( dato => {
-            // console.log(dato);
-            totalPaginas = calcularPaginas(dato.totalHits);
-            // console.log(totalPaginas);
-            mostrarImagenes(dato.hits);
-        })
+//     fetch(url)
+//         .then(respuesta => respuesta.json())
+//         .then( dato => {
+//             // console.log(dato);
+//             totalPaginas = calcularPaginas(dato.totalHits);
+//             // console.log(totalPaginas);
+//             mostrarImagenes(dato.hits);
+//         })
+    
+     try {
+        const respuesta = await fetch(url);
+        const dato = await dato.json();
+        totalPaginas = calcularPaginas(resultado.totalHits);
+        mostrarImagenes(resultado.hits);
+    } catch (error) {
+        console.log(error);
+    }
+    
 }
 
 function calcularPaginas(total){
